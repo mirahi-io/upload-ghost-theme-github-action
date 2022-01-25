@@ -17,6 +17,8 @@ if [ -z "${INPUT_FILE}" ]; then
   exit 1
 fi
 
+cd /github/workspace
+
 # Admin API key goes here
 KEY="${INPUT_GHOST_API_KEY}"
 
