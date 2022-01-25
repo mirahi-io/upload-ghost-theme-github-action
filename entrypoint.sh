@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -eu
 
 # Check if ghost domain and api key as been set
 if [ -z "${INPUT_GHOST_DOMAIN}" ]; then
@@ -17,7 +18,7 @@ if [ -z "${INPUT_FILE}" ]; then
 fi
 
 # Admin API key goes here
-KEY="$INPUT_GHOST_API_KEY"
+KEY="${INPUT_GHOST_API_KEY}"
 
 # Split the key into ID and SECRET
 TMPIFS=$IFS
@@ -49,4 +50,5 @@ signature=$(printf '%s' "${header_payload}" | openssl dgst -binary -sha256 -mac 
 # Concat payload and signature into a valid JWT token
 TOKEN="${header_payload}.${signature}"
 
-curl -X POST -F "file=@$INPUT_FILE" -H "Authorization: Ghost $TOKEN" $INPUT_GHOST_DOMAIN/ghost/api/v3/admin/themes/upload
+
+curl -X POST -v -F "file=@${INPUT_FILE}" -H "Authorization: Ghost $TOKEN" ${INPUT_GHOST_DOMAIN}/ghost/api/v3/admin/themes/upload
