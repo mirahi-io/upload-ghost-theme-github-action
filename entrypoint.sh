@@ -53,4 +53,4 @@ signature=$(printf '%s' "${header_payload}" | openssl dgst -binary -sha256 -mac 
 TOKEN="${header_payload}.${signature}"
 
 
-curl -X POST -v -F "file=@${INPUT_FILE}" -H "Authorization: Ghost $TOKEN" ${INPUT_GHOST_DOMAIN}/ghost/api/v3/admin/themes/upload
+curl -X POST -v -F "file=@${INPUT_FILE}" -H "Authorization: Ghost $TOKEN" "${INPUT_GHOST_DOMAIN}/ghost/api/v3/admin/themes/upload"
