@@ -37,7 +37,7 @@ PAYLOAD="{\"iat\":$NOW,\"exp\":$FIVE_MINS,\"aud\": \"/v3/admin/\"}"
 base64_url_encode() {
     declare input=${1:-$(</dev/stdin)}
     # Use `tr` to URL encode the output from base64.
-    printf '%s' "${input}" | base64 | tr -d '=' | tr '+' '-' |  tr '/' '_'
+    printf '%s' "${input}" | base64 -w 0 | tr -d '=' | tr '+' '-' |  tr '/' '_'
 }
 
 # Prepare the token body
