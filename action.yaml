@@ -1,0 +1,20 @@
+# action.yml
+name: "Upload a theme to Ghost"
+description: "Used to upload a theme to Ghost"
+inputs:
+  ghost_domain:
+    description: "URL domain for your Ghost"
+    required: true
+  ghost_api_key:
+    description: "API key for you Ghost"
+    required: true
+  file:
+    description: "Path to your theme zip file"
+    required: true
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.ghost_domain }}
+    - ${{ inputs.ghost_api_key }}
+    - ${{ inputs.file }}
